@@ -19,28 +19,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Configuration
-TELEGRAM_TOKEN = os.getenv('7916344131:AAGfmZstsfIeqLGXVjqtEOYm_lftHHhwTWc')
+# Configuration - USING DIRECT TOKEN (for testing only)
+TELEGRAM_TOKEN = "7916344131:AAGfmZstsfIeqLGXVjqtEOYm_lftHHhwTWc"  # Your actual token here
 TELEGRAM_GROUP_LINK = "https://t.me/+WbrfygqR3JoyMWM0"
 TWITTER_LINK = "https://x.com/captxrpm?s=11&t=RfuaoDpfagPLK3Y2aHujLw"
 APP_DOWNLOAD_LINK = "https://xrpscan.com/tx/65F070CAFE3F1B07CDD7F8ABADD64211B02ED46F5E8C22982426E35FCB7321CB"
-
-# Validate Token Format
-def validate_token(token):
-    if not token:
-        logger.error("❌ Error: TELEGRAM_TOKEN is not set!")
-        return False
-    if not isinstance(token, str):
-        logger.error("❌ Error: TELEGRAM_TOKEN must be a string!")
-        return False
-    if not token.count(':') == 1:
-        logger.error("❌ Error: Invalid TELEGRAM_TOKEN format! Should be '123456789:ABCdef...'")
-        return False
-    parts = token.split(':')
-    if not parts[0].isdigit() or len(parts[0]) < 5:
-        logger.error("❌ Error: Invalid TELEGRAM_TOKEN format! First part should be numeric ID")
-        return False
-    return True
 
 # In-memory storage
 user_data = {}
@@ -125,12 +108,8 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     logger.error("Exception while handling update:", exc_info=context.error)
 
 def main() -> None:
-    # Validate token before starting
-    if not validate_token(TELEGRAM_TOKEN):
-        logger.error("❌ Fatal Error: Invalid Telegram Token. Shutting down.")
-        return
-    
     try:
+        logger.info("Starting bot with token: 7916344131:... (truncated for security)")
         application = Application.builder().token(TELEGRAM_TOKEN).build()
         
         application.add_handler(CommandHandler("start", start))
@@ -142,8 +121,6 @@ def main() -> None:
         application.run_polling(allowed_updates=Update.ALL_TYPES)
     except Exception as e:
         logger.error(f"❌ Fatal Error: {str(e)}")
-        if "Invalid token" in str(e):
-            logger.error("Please check your TELEGRAM_TOKEN in environment variables!")
 
 if __name__ == '__main__':
     main()
