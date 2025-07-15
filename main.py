@@ -56,7 +56,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                      f"Total referrals: {user_data[referrer_id]['referrals']}/3"
             )
         
-        # Create new user - FIXED THE SYNTAX ERROR HERE
+        # Create new user
         user_data[user_id] = {
             'completed_tasks': {
                 'join_telegram': False,
@@ -68,10 +68,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             'wallet_address': None,
             'referral_code': generate_referral_code()
         }
-        referral_codes[user_data[user_id]['referral_code']] = user_id  # Fixed the bracket here
+        referral_codes[user_data[user_id]['referral_code']] = user_id
     
-    # Create buttons
+    # Create buttons - Added social media buttons here
     keyboard = [
+        [InlineKeyboardButton("📢 Join Telegram Group", url=TELEGRAM_GROUP_LINK)],
+        [InlineKeyboardButton("🐦 Follow on Twitter/X", url=TWITTER_LINK)],
         [
             InlineKeyboardButton("📱 Android", url=PLAY_STORE_LINK),
             InlineKeyboardButton("🍏 iPhone", url=APP_STORE_LINK)
@@ -82,14 +84,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(
         "🌟 *XPM MEME Airdrop Bot* 🌟\n\n"
         "*Complete these steps:*\n"
-        "1️⃣ Join Telegram Group\n"
-        "2️⃣ Follow on Twitter\n"
-        "3️⃣ Download XRPM App\n"
+        "1️⃣ Join our Telegram group (click button below)\n"
+        "2️⃣ Follow us on Twitter/X (click button below)\n"
+        "3️⃣ Download XRPM app\n"
         "4️⃣ Own 1+ XRP\n"
         "5️⃣ Refer Friends (1 XRP per referral, max 3 XRP)\n\n"
-        f"Your code: `{user_data[user_id]['referral_code']}`",
+        f"Your referral code: `{user_data[user_id]['referral_code']}`",
         reply_markup=InlineKeyboardMarkup(keyboard),
-        parse_mode=ParseMode.MARKDOWN
+        parse_mode=ParseMode.MARKDOWN,
+        disable_web_page_preview=True
     )
 
 async def handle_wallet(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
