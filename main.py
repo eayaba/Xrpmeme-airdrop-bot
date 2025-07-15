@@ -22,10 +22,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# --- SECURITY WARNING ---
-# Never commit this to version control or share publicly
-# For production, use environment variables instead
-TELEGRAM_TOKEN = "7916344131:AAGfmZstsfIeqLGXVjqtEOYm_lftHHhwTWc"  # REPLACE WITH YOUR ACTUAL TOKEN
+# Bot Token (Replace with your actual token)
+TELEGRAM_TOKEN = "7916344131:AAGfmZstsfIeqLGXVjqtEOYm_lftHHhwTWc"
 
 # App Configuration
 TELEGRAM_GROUP_LINK = "https://t.me/+WbrfygqR3JoyMWM0"
@@ -33,7 +31,7 @@ TWITTER_LINK = "https://x.com/captxrpm"
 PLAY_STORE_LINK = "https://play.google.com/store/apps/details?id=com.xrpm"
 APP_STORE_LINK = "https://apps.apple.com/us/app/xrpm/id6739287517"
 
-# In-memory storage (replace with database in production)
+# In-memory storage
 user_data = {}
 referral_codes = {}
 
@@ -58,7 +56,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                      f"Total referrals: {user_data[referrer_id]['referrals']}/3"
             )
         
-        # Create new user
+        # Create new user - FIXED THE SYNTAX ERROR HERE
         user_data[user_id] = {
             'completed_tasks': {
                 'join_telegram': False,
@@ -70,7 +68,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             'wallet_address': None,
             'referral_code': generate_referral_code()
         }
-        referral_codes[user_data[user_id]['referral_code'] = user_id
+        referral_codes[user_data[user_id]['referral_code']] = user_id  # Fixed the bracket here
     
     # Create buttons
     keyboard = [
