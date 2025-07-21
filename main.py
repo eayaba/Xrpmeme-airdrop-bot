@@ -76,22 +76,22 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         [InlineKeyboardButton("📢 Join Telegram Group", url=TELEGRAM_GROUP_LINK)],
         [InlineKeyboardButton("🐦 Follow on Twitter/X", url=TWITTER_LINK)],
         [
-            InlineKeyboardButton("📱 Android", url=PLAY_STORE_LINK),
-            InlineKeyboardButton("🍏 iPhone", url=APP_STORE_LINK)
+            InlineKeyboardButton("#3 📱 Android", url=PLAY_STORE_LINK),
+            InlineKeyboardButton("#3 🍏 iPhone", url=APP_STORE_LINK)
         ],
         [InlineKeyboardButton("🔗 Activate Referral Program", url=REFERRAL_PROGRAM_LINK)],
         [InlineKeyboardButton("✅ Verify All Tasks", callback_data='verify')]
     ]
     
     await update.message.reply_text(
-        "🌟 *XPM MEME Airdrop Bot* 🌟\n\n"
+        "🌟 *XPMMEMEs Airdrop Bot* 🌟\n\n"
         "*Do this simple steps to be rewarded!*\n\n"
         "*Complete these steps:*\n"
-        "1️⃣ Join our Telegram group (click button below)\n"
-        "2️⃣ Follow us on Twitter/X (click button below)\n"
-        "3️⃣ Download XRPM app\n"
-        "4️⃣ Own 1+ XRP\n"
-        "5️⃣ Refer Friends (1 XRP per referral, max 3 XRP)\n"
+        "1️⃣ Join our Telegram group\n"
+        "2️⃣ Follow us on Twitter/X\n"
+        "3️⃣ Download XRPM app and Send a Mininmum of 1 XRP to activate your new wallet\n"
+        "4️⃣ Add XRPM to your token list/trustline\n"
+        "5️⃣ Activate Referral Program\n"
         "6️⃣ Refer friends for reward by sharing your referral link\n\n"
         "*Reward tier*\n"
         "1 Friend   = 1 XRP + 100 XRPM\n"
